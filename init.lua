@@ -10,6 +10,8 @@ vim.opt.shiftwidth = 4
 vim.opt.number = true
 vim.g.have_nerd_font = true
 
+vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
+
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)

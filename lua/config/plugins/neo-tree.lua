@@ -8,9 +8,9 @@ return {
       "MunifTanjim/nui.nvim",
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
-    keys = {
-      { "<leader>b", "<cmd>Neotree toggle<CR>" },
-      { "<leader>q", "<cmd>Neotree close<CR>" }
-    },
+    config = function()
+      vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>")
+      vim.keymap.set("n", "<leader>q", "<cmd>Neotree close<CR>")
+    end
   },
 }
