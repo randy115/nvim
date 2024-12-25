@@ -13,6 +13,15 @@ return {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 
         callback = function(event)
+          vim.diagnostic.config({
+            virtual_text = true,     -- Show diagnostics inline
+            signs = true,            -- Show signs in the sign column
+            update_in_insert = true, -- Update diagnostics while typing
+            underline = true,
+            severity_sort = true,
+            float = { border = "rounded" },
+          })
+
           local c = vim.lsp.get_client_by_id(event.data.client_id)
           if not c then
             return
