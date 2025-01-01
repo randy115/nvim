@@ -7,8 +7,10 @@ require("config.lazy")
 
 -- vim configs
 vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.number = true
 vim.g.have_nerd_font = true
+vim.opt.wrap = false
 
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 
