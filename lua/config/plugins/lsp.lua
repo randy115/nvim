@@ -6,7 +6,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "saghen/blink.cmp",
-      { "j-hui/fidget.nvim",       opts = {} },
+      { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -14,8 +14,8 @@ return {
 
         callback = function(event)
           vim.diagnostic.config({
-            virtual_text = true,     -- Show diagnostics inline
-            signs = true,            -- Show signs in the sign column
+            virtual_text = true, -- Show diagnostics inline
+            signs = true, -- Show signs in the sign column
             update_in_insert = true, -- Update diagnostics while typing
             underline = true,
             severity_sort = true,
@@ -127,6 +127,30 @@ return {
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        dockerls = {
+          settings = {
+            docker = {
+              languageserver = {
+                formatter = {
+                  ignoreMultilineInstructions = true,
+                },
+              },
+            },
+          },
+        },
+        jsonls = {},
+        gitlab_ci_ls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                ["../path/relative/to/file.yml"] = "/.github/workflows/*",
+                ["/path/from/root/of/project"] = "/.github/workflows/*",
+              },
             },
           },
         },
