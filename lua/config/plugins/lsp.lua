@@ -6,7 +6,8 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "saghen/blink.cmp",
-      { "j-hui/fidget.nvim",       opts = {} },
+      { "j-hui/fidget.nvim", opts = {} },
+      "nvim-java/nvim-java",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -14,8 +15,8 @@ return {
 
         callback = function(event)
           vim.diagnostic.config({
-            virtual_text = true,     -- Show diagnostics inline
-            signs = true,            -- Show signs in the sign column
+            virtual_text = true, -- Show diagnostics inline
+            signs = true, -- Show signs in the sign column
             update_in_insert = true, -- Update diagnostics while typing
             underline = true,
             severity_sort = true,
@@ -100,6 +101,9 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+      require("java").setup()
+
       local servers = {
         gopls = {
           settings = {

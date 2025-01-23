@@ -36,6 +36,7 @@ return {
         go = { "goimports", "gofmt" },
         python = { "isort", "black" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
+        java = { "google_java_format" },
       },
     },
   },
