@@ -9,8 +9,9 @@ return {
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     config = function()
-      vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>")
-      vim.keymap.set("n", "<leader>q", "<cmd>Neotree close<CR>")
-    end
+      vim.keymap.set("n", "<leader>eo", "<cmd>Neotree toggle<CR>")
+      vim.keymap.set("n", "<leader>eq", "<cmd>Neotree close<CR>")
+      vim.keymap.set("n", "<leader>ef", "<cmd>Neotree focus<CR>")
+    end,
   },
 }
