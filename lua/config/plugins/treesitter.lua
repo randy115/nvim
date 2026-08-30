@@ -20,6 +20,7 @@ return {
           "query",
           "markdown",
           "markdown_inline",
+          "jinja",
         },
         auto_install = false,
         highlight = {
