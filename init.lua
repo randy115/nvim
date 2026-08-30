@@ -31,6 +31,17 @@ if vim.fn.has("wsl") == 1 then
   }
 end
 
+-- Over SSH there is no local clipboard tool, so route copies to the
+-- terminal via OSC 52. Paste reads the local register to avoid a 10s
+-- stall waiting for a terminal response.
+if vim.env.SSH_TTY then
+  local osc52 = require("vim.ui.clipboard.osc52")
+  vim.g.clipboard = {
+    copy = { ["+"] = osc52.copy("+") },
+    paste = { ["+"] = function() return vim.split(vim.fn.getreg('"'), "\n") end },
+  }
+end
+
 vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("TextYankPost", {
