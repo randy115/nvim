@@ -18,6 +18,10 @@ vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 
+-- Fold markdown by heading (built-in ftplugin), but open files unfolded.
+vim.g.markdown_folding = 1
+vim.opt.foldlevelstart = 99
+
 if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
     copy = {
