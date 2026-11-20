@@ -4,7 +4,6 @@ return {
     dependencies = {
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
       "saghen/blink.cmp",
       { "j-hui/fidget.nvim", opts = {} },
       "nvim-java/nvim-java",
@@ -76,67 +75,21 @@ return {
         end,
       })
 
-      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-
+      -- nvim-java manages its own JDTLS installation and configuration.
       require("java").setup()
+      require("config.spring").setup()
+      vim.lsp.enable("jdtls")
 
-      local servers = {
-        gopls = {
-          settings = {
-            gopls = {
-              analyses = {
-                unusedparams = true,
-              },
-              staticcheck = true,
-              gofumpt = true,
-            },
-          },
-        },
-        pyright = {},
-        lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = "Replace",
-              },
-              diagnostics = {
-                globals = { "vim" },
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
-      }
-
-      require("mason").setup()
-
-      local ensure_installed = vim.tbl_keys(servers or {})
-
-      require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
+      -- Use server defaults and automatically enable LSPs installed through Mason.
       require("mason-lspconfig").setup({
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end,
+        ensure_installed = {
+          "gopls",
+          "jinja_lsp",
+          "lua_ls",
+          "pyright",
+          "ts_ls",
         },
+        automatic_enable = { exclude = { "jdtls" } },
       })
     end,
   },

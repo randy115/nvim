@@ -2,6 +2,14 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Current plugins do not use external language providers; LSPs are independent.
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
+vim.filetype.add({ extension = { gotmpl = "gotmpl" } })
+
 -- bootstrapping lazy to vim
 require("config.lazy")
 require("config.keymaps")
